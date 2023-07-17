@@ -10,14 +10,25 @@ function Board(){
 
     // function that handles clicking on a given square
     function handleSquareClick(i){
+        // each time a square is clicked verify if it's not already filled
+        // or if there's a winner if that's true return and so nothing
+        if (squares[i] || getWinner(squares)){
+            return ;
+        }
         // create a copy of the squares array
         let newSquares = squares.slice();
-        newSquares[i] = 'X';
+        xIsNext ? newSquares[i] = 'X' : newSquares[i] = 'O' ;
         setSquares(newSquares);
+        setXIsNext(!xIsNext);
     };
-
+    let status;
+    let winner = getWinner(squares);
+    winner ? status = 'Game over, the winner is : ' + winner : status = 'Next Player : ' + (xIsNext ? 'X' : 'O') ;
     return (
     <div className="board">
+        <div className="game-status">
+            {status}
+        </div>
          <div className="board-row">
             <Square value = {squares[0]} onSquareClick = {() => handleSquareClick(0)} />
             <Square value = {squares[1]} onSquareClick = {() => handleSquareClick(1)} />
@@ -38,3 +49,25 @@ function Board(){
 };
 
 export default Board;
+
+// function that cheks if there's a winner and returns it 
+function getWinner(squares){
+    const winner_combinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
+
+    for(let i = 0; i < winner_combinations.length ; i++){
+        const [a, b, c] = winner_combinations[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
+            return squares[a];
+        }
+    }
+    return null;
+};
