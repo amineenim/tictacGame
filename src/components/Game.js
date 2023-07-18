@@ -14,7 +14,6 @@ function Game(){
 
     function handleAddHistory(newSquares){
         let newHistory = [...history.slice(0, move + 1), newSquares];
-        console.log(history);
         setMove(move +1);
         setHistory(newHistory);
         setXIsNext(!xIsNext);
