@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import './styles/Square.css';
 
 function Square({value, onSquareClick}){

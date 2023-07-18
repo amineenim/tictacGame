@@ -1,11 +1,11 @@
-import { useState } from 'react';
+
 import './styles/App.css';
-import Board from './Board';
+import Game from './Game';
 
 export default function App(){
   return (
     <div className='app'>
-      <Board/>
+      <Game />
     </div>
   );
 };
